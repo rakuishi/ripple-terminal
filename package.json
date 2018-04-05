@@ -1,0 +1,22 @@
+{
+  "name": "ripple-terminal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ripple.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rakuishi/ripple-terminal.git"
+  },
+  "author": "rakuishi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rakuishi/ripple-terminal/issues"
+  },
+  "homepage": "https://github.com/rakuishi/ripple-terminal#readme",
+  "devDependencies": {
+    "ripple-lib": "^0.19.1"
+  }
+}
