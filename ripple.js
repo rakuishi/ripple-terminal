@@ -119,6 +119,7 @@ switch (process.argv[2]) {
       '  balance   Get XRP balance | ./ripple.js balance [address]\n' +
       '  fee       Get the estimated transaction fee\n' +
       '  help      Help about any command\n' +
-      '  new       Generate a new XRP Ledger address and corresponding secret'
+      '  new       Generate a new XRP Ledger address and corresponding secret\n' +
+      '  send      Send XRP | ./ripple.js send [source_address] [source_secret] [destination_address] [amount]'
     );
 }
