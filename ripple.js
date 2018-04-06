@@ -37,6 +37,66 @@ const generateAddress = () => {
   console.log(address);
 };
 
+// send
+const send = () => {
+  const source_address = process.argv[3];
+  const source_secret = process.argv[4];
+  const destination_address = process.argv[5];
+  const amount = process.argv[6];
+  if (!source_address || !source_secret || !destination_address || !amount) {
+    console.log('Error: Unable to get source_address, source_secret, destination_address and amount.');
+    return;
+  }
+
+  const payment = {
+    source: {
+      address: source_address,
+      maxAmount: {
+        value: String(amount),
+        currency: 'XRP'
+      }
+    },
+    destination: {
+      address: destination_address,
+      amount: {
+        value: String(amount),
+        currency: 'XRP'
+      }
+    }
+  };
+
+  console.log(payment);
+  sleep(5000).then(() => {
+    api.connect().then(() => {
+      console.log('Connected...');
+      return api.preparePayment(source_address, payment).then(prepared => {
+        console.log('Payment transaction prepared...');
+        const { signedTransaction } = api.sign(prepared.txJSON, source_secret);
+        console.log('Payment transaction signed...');
+        api.submit(signedTransaction).then(quit, fail);
+      });
+    }).catch(fail);
+  });
+};
+
+const quit = (message) => {
+  console.log(message);
+  process.exit(0);
+};
+
+const fail = (message) => {
+  console.error(message);
+  process.exit(1);
+};
+
+const sleep = (delay) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, delay);
+  });
+};
+
 switch (process.argv[2]) {
   case 'balance':
     getBalance();
@@ -46,6 +106,9 @@ switch (process.argv[2]) {
     break;
   case 'new':
     generateAddress();
+    break;
+  case 'send':
+    send();
     break;
   case 'help':
   default:

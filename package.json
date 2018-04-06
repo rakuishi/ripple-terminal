@@ -18,5 +18,8 @@
   "homepage": "https://github.com/rakuishi/ripple-terminal#readme",
   "devDependencies": {
     "ripple-lib": "^0.19.1"
+  },
+  "dependencies": {
+    "jsonschema": "^1.2.2"
   }
 }
