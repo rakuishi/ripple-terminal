@@ -10,6 +10,7 @@ v9.8.0
 
 $ git clone https://github.com/rakuishi/ripple-terminal.git
 $ cd ripple-terminal
+$ npm install
 $ ./ripple.js help
 Usage:
   ./ripple.js [command]
