@@ -48,7 +48,7 @@ const send = () => {
     return;
   }
 
-  const payment = {
+  let payment = {
     source: {
       address: source_address,
       maxAmount: {
@@ -65,8 +65,12 @@ const send = () => {
     }
   };
 
+  if (!!process.argv[7]) {
+    payment.destination.tag = parseInt(process.argv[7]);
+  }
+
   console.log(payment);
-  sleep(5000).then(() => {
+  sleep(10000).then(() => {
     api.connect().then(() => {
       console.log('Connected...');
       return api.preparePayment(source_address, payment).then(prepared => {
@@ -120,6 +124,6 @@ switch (process.argv[2]) {
       '  fee       Get the estimated transaction fee\n' +
       '  help      Help about any command\n' +
       '  new       Generate a new XRP Ledger address and corresponding secret\n' +
-      '  send      Send XRP | ./ripple.js send [source_address] [source_secret] [destination_address] [amount]'
+      '  send      Send XRP | ./ripple.js send [source_address] [source_secret] [destination_address] [amount] (destination_tag)'
     );
 }
